@@ -4,7 +4,7 @@
 html { min-width: 320px; }
 body {
   margin: 0;
-  background: radial-gradient(ellipse 65% 35% at 50% 0%, #172746 0%, transparent 100%), var(--color-page);
+  background: radial-gradient(ellipse 65% 35% at 50% 0%, var(--color-surface-raised) 0%, transparent 100%), var(--color-page);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.5;
