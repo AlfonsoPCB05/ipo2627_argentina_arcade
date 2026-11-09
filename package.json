@@ -3,8 +3,5 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Proyecto académico arcade, Canvas nativo y patrón MVC",
-  "scripts": {
-    "test": "node --test tests/*.test.js"
-  }
+  "description": "Proyecto académico arcade, Canvas nativo y patrón MVC"
 }
