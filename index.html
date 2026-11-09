@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1021">
+    <meta name="description" content="Nebula 84: juego arcade de defensa espacial realizado con HTML, CSS, JavaScript y Canvas nativos.">
+    <title>Nebula 84 · Arcade espacial</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Nebula 84, inicio">
+          <span class="brand__mark" aria-hidden="true">✦</span>
+          <span>NEBULA<span class="brand__number">84</span></span>
+        </a>
+        <span class="site-header__edition">ARCADE / EDICIÓN INTERGALÁCTICA</span>
+        <span class="site-header__signal"><span class="signal-dot" aria-hidden="true"></span> SISTEMA EN LÍNEA</span>
+      </header>
+
+      <main class="arcade" id="contenido">
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow">01 / CENTRO DE OPERACIONES</p>
+          <h1 id="page-title">La última línea <em>de defensa.</em></h1>
+          <p class="intro__description">Pilota tu nave, esquiva el fuego enemigo y supera tres oleadas. El universo cuenta contigo.</p>
+        </section>
+
+        <div class="arcade__grid">
+          <section class="game-panel" aria-label="Zona de juego">
+            <div class="scoreboard" aria-label="Datos de la partida">
+              <div class="scoreboard__item">
+                <span class="scoreboard__label">PUNTOS</span>
+                <strong class="scoreboard__value" id="score-value">00000</strong>
+              </div>
+              <div class="scoreboard__item">
+                <span class="scoreboard__label">VIDAS</span>
+                <strong class="scoreboard__value" id="lives-value" aria-label="3 vidas">♥ ♥ ♥</strong>
+              </div>
+              <div class="scoreboard__item">
+                <span class="scoreboard__label">OLEADA</span>
+                <strong class="scoreboard__value" id="wave-value">01 / 03</strong>
+              </div>
+              <div class="scoreboard__item scoreboard__item--status">
+                <span class="scoreboard__label">ESTADO</span>
+                <strong class="game-status" id="game-status" data-state="ready"><span class="game-status__dot" aria-hidden="true"></span><span id="status-label">PREPARADO</span></strong>
+              </div>
+            </div>
+
+            <div class="game-screen">
+              <canvas id="game-canvas" width="960" height="560" tabindex="0" role="img" aria-label="Área de juego. Mueve la nave con A y D o flechas, dispara con espacio y pausa con P.">
+                Este juego requiere un navegador compatible con la API Canvas.
+              </canvas>
+            </div>
+            <p class="screen-caption"><span aria-hidden="true">◈</span> SECTOR 07 · CAMPO DE ASTEROIDES <span class="screen-caption__right">960 × 560 / CANVAS 2D</span></p>
+
+            <div class="touch-controls" aria-label="Controles táctiles para jugar">
+              <div class="touch-controls__movement">
+                <button class="touch-control" type="button" data-control="left" aria-label="Mover a la izquierda">←</button>
+                <button class="touch-control" type="button" data-control="right" aria-label="Mover a la derecha">→</button>
+              </div>
+              <button class="touch-control touch-control--shoot" type="button" data-control="shoot" aria-label="Disparar">DISPARAR <span aria-hidden="true">✦</span></button>
+            </div>
+          </section>
+
+          <aside class="sidebar" aria-label="Controles e instrucciones">
+            <section class="control-card" aria-labelledby="control-title">
+              <div class="panel-heading">
+                <p class="eyebrow">02 / PANEL DE MANDO</p>
+                <span class="panel-heading__ornament" aria-hidden="true">✳</span>
+              </div>
+              <h2 id="control-title">Control de misión</h2>
+              <p class="control-card__description">Prepara tu nave y elige cómo enfrentarte a la invasión.</p>
+
+              <div class="field">
+                <label for="difficulty">NIVEL DE DIFICULTAD</label>
+                <select id="difficulty" name="difficulty">
+                  <option value="easy">Cadete · Fácil</option>
+                  <option value="normal" selected>Piloto · Normal</option>
+                  <option value="hard">Comandante · Difícil</option>
+                </select>
+                <p class="field__hint" id="difficulty-hint">3 vidas · velocidad estándar</p>
+              </div>
+
+              <div class="actions">
+                <button class="button button--primary" type="button" id="start-button"><span aria-hidden="true">▶</span><span id="start-label">Iniciar partida</span></button>
+                <button class="button button--secondary" type="button" id="pause-button" disabled><span aria-hidden="true" id="pause-icon">Ⅱ</span><span id="pause-label">Pausar</span></button>
+                <button class="button button--secondary button--danger" type="button" id="end-button" disabled><span aria-hidden="true">■</span> Finalizar partida</button>
+              </div>
+              <p class="control-card__footnote" id="game-message">Todo listo. La misión comienza cuando tú decidas.</p>
+            </section>
+
+            <section class="info-card" aria-labelledby="instructions-title">
+              <div class="info-card__title-row">
+                <h2 id="instructions-title">Controles</h2>
+                <span class="info-card__meta">TECLADO</span>
+              </div>
+              <dl class="key-list">
+                <div><dt>Mover</dt><dd><kbd>←</kbd><kbd>→</kbd><span class="key-list__or">o</span><kbd>A</kbd><kbd>D</kbd></dd></div>
+                <div><dt>Disparar</dt><dd><kbd class="key-list__wide">Espacio</kbd></dd></div>
+                <div><dt>Pausa</dt><dd><kbd>P</kbd></dd></div>
+              </dl>
+              <button class="help-link" type="button" popovertarget="help-popover">Ver reglas y ayuda completa <span aria-hidden="true">↗</span></button>
+            </section>
+
+            <section class="objective-card" aria-labelledby="objective-title">
+              <span class="objective-card__icon" aria-hidden="true">◎</span>
+              <div>
+                <h2 id="objective-title">Tu objetivo</h2>
+                <p>Destruye todos los invasores durante <strong>3 oleadas</strong>. Protege tus vidas y evita que alcancen tu posición.</p>
+              </div>
+            </section>
+          </aside>
+        </div>
+        <p class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+      </main>
+
+      <footer class="site-footer">
+        <span>NEBULA 84 <span aria-hidden="true">✦</span> UN ARCADE DE BOLSILLO</span>
+        <span>HECHO CON HTML · CSS · JAVASCRIPT · CANVAS API</span>
+      </footer>
+    </div>
+
+    <aside class="help-popover" id="help-popover" popover="auto" aria-labelledby="help-title">
+      <div class="help-popover__head">
+        <div>
+          <p class="eyebrow">MANUAL DEL PILOTO / V.01</p>
+          <h2 id="help-title">Cómo jugar</h2>
+        </div>
+        <button class="help-popover__close" type="button" popovertarget="help-popover" popovertargetaction="hide" aria-label="Cerrar ayuda">×</button>
+      </div>
+      <div class="help-popover__body">
+        <p>Defiende tu sector de una flota extraterrestre. Completa las <strong>tres oleadas</strong> para ganar.</p>
+        <ol>
+          <li><strong>Muévete</strong> con las flechas izquierda/derecha o A/D.</li>
+          <li><strong>Dispara</strong> con la barra espaciadora. Puedes mantenerla pulsada.</li>
+          <li><strong>Esquiva</strong> los disparos enemigos. Cada impacto te quita una vida.</li>
+          <li><strong>Gana</strong> al eliminar a todos los enemigos de la tercera oleada.</li>
+        </ol>
+        <div class="help-popover__notice"><strong>Importante:</strong> también pierdes si los enemigos llegan hasta la nave. Puedes pausar con P o con el botón «Pausar». La ayuda pausa automáticamente la partida.</div>
+        <p>La dificultad se elige antes de comenzar. Para cambiarla tendrás que iniciar una partida nueva.</p>
+      </div>
+      <button class="button button--primary help-popover__action" type="button" popovertarget="help-popover" popovertargetaction="hide">Entendido</button>
+    </aside>
+  </body>
+</html>

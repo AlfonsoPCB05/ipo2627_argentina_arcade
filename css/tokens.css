@@ -1,0 +1,31 @@
+/* 1. Sistema cromático, tipográfico y espacial.
+   Base azul oscuro (monocromática), con cian de acción y ámbar de acento.
+   Las variables agrupan decisiones de diseño para evitar valores dispersos. */
+:root {
+  color-scheme: dark;
+  --color-page: #080d1b;
+  --color-surface: #10182a;
+  --color-surface-raised: #172238;
+  --color-border: #293851;
+  --color-text: #f1f5fd;
+  --color-muted: #95a7bf;
+  --color-soft: #b9c9d9;
+  --color-accent: #68e6d9;
+  --color-accent-strong: #3dcabf;
+  --color-amber: #f4c97d;
+  --color-danger: #ff8a98;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --radius-sm: .5rem;
+  --radius-md: .875rem;
+  --radius-lg: 1.125rem;
+  --shadow-panel: 0 18px 50px rgb(0 0 0 / 18%);
+}
